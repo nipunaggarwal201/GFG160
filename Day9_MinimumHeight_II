@@ -1,0 +1,26 @@
+class Solution {
+    int getMinDiff(int[] arr, int k) {
+        // code here nipun_aggarwal
+        Arrays.sort(arr);
+        int n = arr.length;
+        int ans = arr[n-1]-arr[0];
+        
+        for(int i =1;i<n;i++)
+        {
+            if(arr[i] - k < 0)
+            {
+                continue;
+            }
+            //Traverse previous element for Max. So that same element 
+            //does not go in both min and max
+            int max = Math.max(arr[i-1]+k , arr[n-1]-k);
+            
+            //Traverse current element for min
+            int min = Math.min(arr[i]- k , arr[0]+k);
+            
+            //Keep Updating the answere
+            ans = Math.min(max-min, ans);
+        }
+        return ans;
+    }
+}
