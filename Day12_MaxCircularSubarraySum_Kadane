@@ -1,0 +1,27 @@
+class Solution {
+    public int circularSubarraySum(int arr[]) {
+        // Your code here nipun_aggarwal
+        int totalsum =0;
+        int max = arr[0];
+        int min = arr[0];
+        int temp_min = 0;
+        int temp = 0;
+        
+        for(int i=0;i<arr.length;i++)
+        {
+            temp = Math.max(temp + arr[i], arr[i]);
+            max = Math.max(temp, max);
+            if(temp < 0) temp = 0;
+            
+            temp_min = Math.min(temp_min + arr[i], arr[i]);
+            min = Math.min(temp_min, min);
+            
+            totalsum += arr[i]; 
+        }
+        //To maximize CircularSum, we need to minimize the middle elements sum
+        //Circular sum equals totalsum - sum of middle elements
+        int circular_max = totalsum - min;
+        
+        return Math.max(circular_max, max);
+    }
+}
