@@ -1,0 +1,37 @@
+class Solution {
+    public String addBinary(String s1, String s2) {
+        // code here nipun_aggarwal
+        String ans = "";
+        int digit = 0;
+        
+        int i = s1.length()-1;
+        int j = s2.length()-1;
+        
+        while(i>=0 || j>=0)
+        {
+            if(i>=0 && s1.charAt(i) == '1')
+            {
+                digit +=1;
+            }
+            if(j>=0 && s2.charAt(j) == '1')
+            {
+                digit +=1;
+            }
+            if(digit % 2 == 1)
+            {
+                ans = '1' + ans;
+            }
+            else
+            {
+                ans = '0' + ans;
+            }
+
+            digit = digit/2;
+            //System.out.println(ans+" "+digit);
+            i--;j--;
+        }
+        if(digit==1) ans = '1'+ans;
+        
+        return ans.substring(ans.indexOf('1'));
+    }
+}
