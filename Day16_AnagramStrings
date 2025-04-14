@@ -1,0 +1,29 @@
+class Solution {
+    // Function is to check whether two strings are anagram of each other or not.
+    public static boolean areAnagrams(String s1, String s2) {
+
+        // Your code here nipun_aggarwal
+        //for strings try frequency array appraoch (26 chars)
+        int freq[] = new int[26];
+        Arrays.fill(freq,0);
+        
+        for(int i=0;i<s1.length();i++)
+        {
+            int temp = s1.charAt(i)-97;
+            freq[temp] += 1;
+        }
+        
+        for(int i=0;i<s2.length();i++)
+        {
+            int temp = s2.charAt(i)-97;
+            if(freq[temp]==0) return false;
+            
+            freq[temp] -=1;
+        }
+        for(int i=0;i<26;i++)
+        {
+            if(freq[i]>=1) return false;
+        }
+        return true;
+    }
+}
