@@ -1,0 +1,38 @@
+class Solution {
+    static char nonRepeatingChar(String s) {
+        // code here nipun_aggarwal
+        int[] freq = new int[26];
+        Arrays.fill(freq, 0);
+        
+        int track = 1;
+        
+        for(int i=0;i<s.length();i++)
+        {
+            int ind = s.charAt(i)-97;
+            
+            if(freq[ind] == 0 )
+            {
+                freq[ind] = track;
+                track++;
+            }
+            else
+            {
+                freq[ind] = -1;
+            }
+        }
+        int min = Integer.MAX_VALUE;
+        char ans = '$';
+        
+        for(int i=0;i<26;i++)
+        {
+            if(freq[i] != -1 && freq[i]<min && freq[i]>0)
+            {
+                //System.out.println(i);
+                min = freq[i];
+                ans = (char)(i + 97);
+                
+            }
+        }
+        return ans;
+    }
+}
