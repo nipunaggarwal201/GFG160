@@ -1,0 +1,59 @@
+class Solution {
+    static int merge(int[] arr, int start, int mid, int end)
+    {
+        int res = 0, n1 = mid-start+1, n2 = end-mid;
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+        
+        for(int i=0;i<n1;i++)
+        {
+            L[i] = arr[start+i];
+        }
+        for(int i=0;i<n2;i++)
+        {
+            R[i] = arr[mid+i+1];
+        }
+        int i=0, j =0;
+        int k = start;
+        while(i<n1 && j<n2)
+        {
+            if(L[i]>R[j])
+            {
+                arr[k++] = R[j++];
+                //It should not be res +=1 but res += (n1-i) becuase R[j]
+                res +=(n1-i); //will be smaller than n1-i items (since L is sorted)
+            }
+            else
+            {
+                arr[k++] = L[i++];
+            }
+        }
+        while(i<n1)
+        {
+            arr[k++] = L[i++];
+        }
+        while(j<n2)
+        {
+            arr[k++] = R[j++];
+        }
+        return res;
+        
+    }
+    static int mergesort(int[] arr, int start, int end)
+    {
+        int res = 0;
+        if(start<end)
+        {
+            int mid = (start + end) / 2;
+            res += mergesort(arr, start, mid);
+            res += mergesort(arr, mid+1, end);
+            res += merge(arr, start,mid, end);
+        }
+        return res;
+    }
+    static int inversionCount(int arr[]) {
+        // Your Code Here nipun_aggarwal
+        return mergesort(arr,0, arr.length-1);
+        
+    }
+}
