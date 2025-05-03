@@ -1,0 +1,24 @@
+class Solution {
+    public int kthMissing(int[] arr, int k) {
+        // code here nipun_aggarwal
+        int n = arr.length;
+        int end = n-1;
+        int start = 0;
+        while(start<= end)
+        {
+            int mid = (end + start)/2;
+            int dif = arr[mid] - (mid+1);
+            if(dif <k)
+            {
+                start = mid+1;
+            }
+            else
+            {
+                end = mid-1;
+            }
+        }
+        //int missing = arr[end] - (end + 1);
+        int ans = k + end + 1;
+        return ans;
+    }
+}
